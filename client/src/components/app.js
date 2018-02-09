@@ -6,10 +6,12 @@ import RQTable from './rq-table'
 class App extends Component {
   render(){
     return(
-      <div>
-        <header>
-          <h1>Welcome to rQ App</h1>
-        </header>
+      <div className="container">
+        <div className="row">
+          <header className="col-xs-12">
+            <h1>Welcome to rQ App</h1>
+          </header>
+        </div>
         <FormSwitcher />
         <RQTable />
         <RQChart />
