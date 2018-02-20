@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import formatDate from '../util/helpers'
 
 class RQForm extends Component {
   constructor(props){
     super(props)
     this.state = {
       rQ: 45.75,
-      date: new Date()
+      date: formatDate(new Date())
     }
-
-    this.onRQChange = this.onRQChange.bind(this)
-    this.onDateChange = this.onDateChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit(e){
@@ -20,43 +17,38 @@ class RQForm extends Component {
       body: JSON.stringify(this.state),
       headers: { 'Content-Type': 'application/json' }
     }).then(result => {
-      debugger
       return result.json()
     }).then(data => {
-      debugger
       if(data.errors) throw data.message
     })
   }
 
-  onInputChange(){
-    // implement this more general input handler!
-  }
-
-  onRQChange(e){
-    this.setState({ rQ: e.currentTarget.value })
-  }
-
-  onDateChange(e){
-    this.setState({ date: e.currentTarget.value })
+  handleChange(e){
+    this.setState({ [e.target.name]: e.target.value })
   }
 
   render(){
     return(
-      <div>
-        <form onSubmit={ this.handleSubmit }>
-          <label>rQ:</label>
-          <input type="text"
-                name="rq"
-                value={ this.state.rQ }
-                onChange={ this.onRQChange } />
+      <div className="col-xs-12">
+        <form id="rq-form" onSubmit={ (e) => this.handleSubmit(e) }>
+          <div>
+            <label>rQ:</label>
+            <input type="text"
+                  name="rQ"
+                  value={ this.state.rQ }
+                  onChange={ (e) => this.handleChange(e) } />
+          </div>
 
-          <label>Date</label>
-          <input type="text"
-                name="date"
-                value={ this.state.date }
-                onChange={ this.onDateChange } />
-
-          <input type="submit" name="submit" />
+          <div>
+            <label>Date:</label>
+            <input type="text"
+                  name="date"
+                  value={ this.state.date }
+                  onChange={ (e) => this.handleChange(e) } />
+          </div>
+          <div>
+            <input type="submit" name="submit" className="btn btn-primary" />
+          </div>
         </form>
       </div>
     )

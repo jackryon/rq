@@ -12,38 +12,48 @@ class FormSwitcher extends Component {
     }
 
     this.state = {
-      activeChild: this.statics.RQForm
+      activeChild: this.statics.rQForm
     }
-
-    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(e){
-    e.preventDefault()
-    debugger
+    this.setState({
+      activeChild: e.target.value
+    })
+  }
+
+  getActiveChildComponent(){
+    if(this.state.activeChild === this.statics.paceHRForm){
+      return <PaceHRForm />
+    } else {
+      return <RQForm />
+    }
   }
 
   render(){
     return(
-      <div>
-        <label>
-          <input type="radio"
-            checked={ true }
-            name="activeChild"
-            value={ this.statics.rQForm }
-            onChange={ this.handleChange }/>
-          Enter rQ
-        </label>
-        <label>
-          <input type="radio"
-            checked={ this.state.activeChild == this.statics.paceHRForm }
-            name="activeChild"
-            value={ this.statics.paceHRForm }
-            onChange={ this.handleChange }/>
-          Enter Pace & Avg HR
-        </label>
-        <RQForm />
-        <PaceHRForm />
+      <div id="form-switcher">
+        <div className="row" >
+          <div className="col-xs-12">
+            <label>
+              <input type="radio"
+                checked={ this.state.activeChild === this.statics.rQForm }
+                value={ this.statics.rQForm }
+                onChange={ (e) => this.handleChange(e) }/>
+              Enter rQ
+            </label>
+            <label>
+              <input type="radio"
+                checked={ this.state.activeChild === this.statics.paceHRForm }
+                value={ this.statics.paceHRForm }
+                onChange={ (e) => this.handleChange(e) }/>
+              Enter Pace & Avg HR
+            </label>
+          </div>
+        </div>
+        <div className="row" id="form-container">
+          { this.getActiveChildComponent() }
+        </div>
       </div>
     )
   }
