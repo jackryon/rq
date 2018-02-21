@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import formatDate from '../util/helpers'
+import { formatDate, postRQ, calculateRQ, getSpeedFromPace } from '../util/helpers'
 
 class PaceHRForm extends Component {
   constructor(props){
@@ -18,8 +18,11 @@ class PaceHRForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    console.log('submit')
+
+    var speed = getSpeedFromPace()
+    postRQ(this.state.rQ, this.state.date)
   }
+
 
   render(){
     return(

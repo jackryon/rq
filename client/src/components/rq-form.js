@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import formatDate from '../util/helpers'
+import { formatDate, postRQ } from '../util/helpers'
 
 class RQForm extends Component {
   constructor(props){
     super(props)
+
     this.state = {
       rQ: 45.75,
       date: formatDate(new Date())
@@ -12,15 +13,7 @@ class RQForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    fetch(process.env.REACT_APP_API_ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      headers: { 'Content-Type': 'application/json' }
-    }).then(result => {
-      return result.json()
-    }).then(data => {
-      if(data.errors) throw data.message
-    })
+    postRQ(this.state.rQ, this.state.date)
   }
 
   handleChange(e){
