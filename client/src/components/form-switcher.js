@@ -1,62 +1,72 @@
 import React, { Component } from 'react'
 import RQForm from './rq-form'
-import PaceHRForm from './pace-hr-form'
+import HRForm from './hr-form'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { switchForms } from '../actions/index'
 
 class FormSwitcher extends Component {
   constructor(props){
     super(props)
-
-    this.statics = {
-      rQForm: 'RQForm',
-      paceHRForm: 'PaceHRForm'
-    }
-
-    this.state = {
-      activeChild: this.statics.rQForm
-    }
   }
 
   handleChange(e){
-    this.setState({
-      activeChild: e.target.value
-    })
+    this.props.switchForms(e.target.value)
   }
 
-  getActiveChildComponent(){
-    if(this.state.activeChild === this.statics.paceHRForm){
-      return <PaceHRForm />
+  getActiveForm(){
+    if(this.props.activeForm === 'rqForm'){
+      <RQForm />
     } else {
-      return <RQForm />
+      <HRForm />
     }
   }
 
   render(){
+    const { activeForm } = this.props
+
     return(
       <div id="form-switcher">
         <div className="row" >
           <div className="col-xs-12">
             <label>
               <input type="radio"
-                checked={ this.state.activeChild === this.statics.rQForm }
-                value={ this.statics.rQForm }
-                onChange={ (e) => this.handleChange(e) }/>
+                checked={ activeForm === 'rqForm' }
+                value="rQForm"
+                onChange={ (e) => { this.handleChange(e) }}/>
               Enter rQ
             </label>
             <label>
               <input type="radio"
-                checked={ this.state.activeChild === this.statics.paceHRForm }
-                value={ this.statics.paceHRForm }
+                checked={ activeForm === 'hrForm' }
+                value="hrForm"
                 onChange={ (e) => this.handleChange(e) }/>
               Enter Pace & Avg HR
             </label>
           </div>
         </div>
         <div className="row" id="form-container">
-          { this.getActiveChildComponent() }
+          { this.getActiveForm() }
         </div>
       </div>
     )
   }
 }
 
-export default FormSwitcher
+function mapStateToProps(state){
+  return {
+    users: state.users
+  }
+}
+
+function matchDispatchToProps(dispatch){
+  return bindActionCreators({ switchForms: switchForms }, dispatch)
+}
+
+FormSwitcher.propTypes = {
+  activeForm: PropTypes.string.isRequired,
+  switchForms: PropTypes.func
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(FormSwitcher)

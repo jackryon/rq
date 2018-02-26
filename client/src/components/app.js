@@ -12,9 +12,10 @@ class App extends Component {
             <h1>Welcome to rQ App</h1>
           </header>
         </div>
-        <FormSwitcher />
-        <RQTable />
-        <RQChart />
+
+        <FormSwitcher activeForm="rqForm" />
+        { /* <RQTable /> */ }
+        { /* <RQChart /> */ }
       </div>
     )
   }

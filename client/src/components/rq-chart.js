@@ -3,8 +3,8 @@ import React from 'react';
 class RQChart extends React.Component {
   render(){
     return(
-      <div>
-        RQChart
+      <div className="row">
+        <h3>RQChart</h3>
       </div>
     )
   }

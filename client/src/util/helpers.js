@@ -30,12 +30,3 @@ export var postRQ = (rQ, date, callback) => {
   })
 }
 
-export var getRQ = (scope, callback) => {
-  fetch(process.env.REACT_APP_API_ENDPOINT)
-    .then(result => {
-      return result.json()
-    })
-    .then(data => {
-      callback.call(scope, JSON.parse(data))
-    })
-}

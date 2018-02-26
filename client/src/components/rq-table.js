@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { formatDate, getRQ } from '../util/helpers'
+import { formatDate } from '../util/helpers'
 
 class RQTable extends React.Component {
   constructor(props){
@@ -9,7 +9,7 @@ class RQTable extends React.Component {
   }
 
   componentDidMount(){
-    getRQ(this, this.handleRQGet)
+    //getRQ(this, this.handleRQGet)
   }
 
   handleRQGet(data){
