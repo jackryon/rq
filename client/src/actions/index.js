@@ -1,6 +1,6 @@
 // ACTIONS
 
-export const switchForms = (activeForm) => {
+export const switchForm = (activeForm) => {
   return {
     type: 'SWITCH_FORMS',
     payload: activeForm

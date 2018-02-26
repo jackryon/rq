@@ -1,30 +1,22 @@
 import React, { Component } from 'react'
 import RQForm from './rq-form'
 import HRForm from './hr-form'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { switchForms } from '../actions/index'
+import { switchForm } from '../actions/index'
 
 class FormSwitcher extends Component {
-  constructor(props){
-    super(props)
-  }
-
-  handleChange(e){
-    this.props.switchForms(e.target.value)
-  }
 
   getActiveForm(){
     if(this.props.activeForm === 'rqForm'){
-      <RQForm />
+      return <RQForm />
     } else {
-      <HRForm />
+      return <HRForm />
     }
   }
 
   render(){
-    const { activeForm } = this.props
+    var activeForm = this.props.activeForm
 
     return(
       <div id="form-switcher">
@@ -33,15 +25,15 @@ class FormSwitcher extends Component {
             <label>
               <input type="radio"
                 checked={ activeForm === 'rqForm' }
-                value="rQForm"
-                onChange={ (e) => { this.handleChange(e) }}/>
+                value="rqForm"
+                onChange={ (e) => { this.props.switchForm(e.target.value) }} />
               Enter rQ
             </label>
             <label>
               <input type="radio"
                 checked={ activeForm === 'hrForm' }
                 value="hrForm"
-                onChange={ (e) => this.handleChange(e) }/>
+                onChange={ (e) => { this.props.switchForm(e.target.value) }} />
               Enter Pace & Avg HR
             </label>
           </div>
@@ -56,17 +48,12 @@ class FormSwitcher extends Component {
 
 function mapStateToProps(state){
   return {
-    users: state.users
+    activeForm: state.activeForm
   }
 }
 
 function matchDispatchToProps(dispatch){
-  return bindActionCreators({ switchForms: switchForms }, dispatch)
-}
-
-FormSwitcher.propTypes = {
-  activeForm: PropTypes.string.isRequired,
-  switchForms: PropTypes.func
+  return bindActionCreators({ switchForm: switchForm }, dispatch)
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(FormSwitcher)

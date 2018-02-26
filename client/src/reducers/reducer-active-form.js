@@ -5,5 +5,5 @@ export default function(state = null, action){
   }
 
 
-  return state
+  return 'rqForm'
 }
