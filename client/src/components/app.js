@@ -14,7 +14,7 @@ class App extends Component {
         </div>
 
         <FormSwitcher activeForm="rqForm" />
-        { /* <RQTable /> */ }
+        <RQTable />
         { /* <RQChart /> */ }
       </div>
     )

@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import ActiveFormReducer from './reducer-active-form'
+import activeFormReducer from './reducer-active-form'
+import { rqs, rqsIsLoading, rqsHasErrored } from './reducer-rqs'
 
-const rqApp = combineReducers({
-  activeForm: ActiveFormReducer
+export default combineReducers({
+  activeFormReducer,
+  rqs,
+  rqsIsLoading,
+  rqsHasErrored
 })
-
-export default rqApp

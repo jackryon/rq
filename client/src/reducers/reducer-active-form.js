@@ -1,9 +1,8 @@
-export default function(state = null, action){
+export default function(state = 'rqForm', action){
   switch(action.type){
     case 'SWITCH_FORMS':
       return action.payload
   }
 
-
-  return 'rqForm'
+  return state
 }

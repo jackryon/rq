@@ -3,16 +3,14 @@ import './stylesheets/index.sass'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './components/app'
-import { createStore, applyMiddleware } from 'redux'
 import registerServiceWorker from './util/registerServiceWorker'
-import allReducers from './reducers'
+import allReducers from './reducers/index'
 import reduxThunk from 'redux-thunk'
+import configureStore from './store/config-store'
 import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
 
-const store = createStore(
-  allReducers,
-  applyMiddleware(reduxThunk)
-)
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={ store }>

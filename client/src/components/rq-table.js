@@ -1,19 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import { formatDate } from '../util/helpers'
+import { bindActionCreators } from 'redux'
+import { rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
 
-class RQTable extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = { rQs: [] }
-  }
+import { connect } from 'react-redux'
+
+class RQTable extends Component {
 
   componentDidMount(){
-    //getRQ(this, this.handleRQGet)
+    debugger
+    this.props.rqsFetch()
   }
 
-  handleRQGet(data){
-    this.setState({ rQs: data })
+  getUIForState(){
+    if(this.props.rqsLoading){
+      return this.getLoading()
+    } else if(this.props.rqsError){
+      return this.getError()
+    } else {
+      return this.getRQTable()
+    }
+  }
+
+  getRQTable(){
+    <table>
+      <thead>
+        <tr>
+          <td>Date</td>
+          <td>rQ</td>
+        </tr>
+      </thead>
+      <tbody>
+        { this.props.rqs.map(rq => {
+          return(
+            <tr key={ rq._id }>
+              <td>{ formatDate(rq.date) }</td>
+              <td>{ rq.value }</td>
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
+  }
+
+  getLoading(){
+    <p>Loading...</p>
+  }
+
+  getError(){
+    <p>{ this.props.rqsError }</p>
   }
 
   render(){
@@ -23,28 +59,27 @@ class RQTable extends React.Component {
           <h3 className="col-xs-12">Raw rQ Data</h3>
         </div>
         <div className="row">
-          <table>
-            <thead>
-              <tr>
-                <td>Date</td>
-                <td>rQ</td>
-              </tr>
-            </thead>
-            <tbody>
-              { this.state.rQs.map(rQ => {
-                return(
-                  <tr key={ rQ._id }>
-                    <td>{ formatDate(rQ.date) }</td>
-                    <td>{ rQ.value }</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
+          { this.getUIForState() }
         </div>
       </div>
     )
   }
 }
 
-export default RQTable
+function mapStateToProps(state){
+  return {
+    rqs: state.rqs,
+    rqsIsLoading: state.rqsIsLoading,
+    rqsError: state.rqsError
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({
+    rqsFetch: rqsFetch,
+    rqsLoading: rqsIsLoading,
+    rqsError: rqsHasErrored
+  }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RQTable)

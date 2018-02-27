@@ -52,8 +52,8 @@ function mapStateToProps(state){
   }
 }
 
-function matchDispatchToProps(dispatch){
+function mapDispatchToProps(dispatch){
   return bindActionCreators({ switchForm: switchForm }, dispatch)
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(FormSwitcher)
+export default connect(mapStateToProps, mapDispatchToProps)(FormSwitcher)
