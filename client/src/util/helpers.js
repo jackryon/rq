@@ -1,3 +1,10 @@
+export var httpHeaders = () => {
+  return {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  }
+}
+
 export var formatDate = (d) => {
   d = new Date(d)
   var mins = (d.getMinutes() < 10 ? '0': '') + d.getMinutes()

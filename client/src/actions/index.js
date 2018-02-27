@@ -1,4 +1,40 @@
+import { httpHeaders } from '../util/helpers'
+
 // ACTIONS
+
+export const rqsPost = (rq, url) => {
+  return (dispatch) => {
+    fetch(url, { headers: httpHeaders() })
+      .then((response) => {
+        if(!response.ok) throw Error(response.statusText)
+        debugger
+        return response
+      })
+      .then((response) => {
+        debugger
+        return response.json()
+      })
+      .then((rq) => {
+        debugger
+      })
+  }
+}
+
+export const rqValsChanged = (name, value) => {
+  return {
+    type: 'rq_vals_changed', {
+      name: name,
+      value: value
+    }
+  }
+}
+
+export const rqsPostSuccess = (rq) => {
+  return {
+    type: 'RQS_POST_SUCCESS',
+    rq
+  }
+}
 
 export const switchForm = (activeForm) => {
   return {
@@ -23,31 +59,23 @@ export const rqsHasErrored = (bool = true) => {
 
 export const rqsFetch = (url) => {
   return (dispatch) => {
-    //dispatch(rqsIsLoading(true))
+    dispatch(rqsIsLoading(true))
 
-    fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }).then((response) => {
-      if(!response.ok){
-          throw Error(response.statusText)
-      }
-
-      dispatch(rqsIsLoading(false))
-
-      return response
-    })
-    .then((response) => {
-      return response.json()
-    })
-    .then((rqs) => {
-      dispatch(rqsFetchSuccess(JSON.parse(rqs)))
-    })
-    .catch(() => {
-      dispatch(rqsHasErrored(true))
-    })
+    fetch(url, { headers: httpHeaders() })
+      .then((response) => {
+        if(!response.ok) throw Error(response.statusText)
+        dispatch(rqsIsLoading(false))
+        return response
+      })
+      .then((response) => {
+        return response.json()
+      })
+      .then((rqs) => {
+        dispatch(rqsFetchSuccess(JSON.parse(rqs)))
+      })
+      .catch(() => {
+        dispatch(rqsHasErrored(true))
+      })
   }
 }
 
