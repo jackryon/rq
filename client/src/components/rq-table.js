@@ -1,16 +1,13 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import { formatDate } from '../util/helpers'
 import { bindActionCreators } from 'redux'
 import { rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
-
 import { connect } from 'react-redux'
 
 class RQTable extends Component {
 
   componentDidMount(){
-    debugger
-    this.props.rqsFetch()
+    this.props.rqsFetch(process.env.REACT_APP_API_ENDPOINT)
   }
 
   getUIForState(){
@@ -24,32 +21,34 @@ class RQTable extends Component {
   }
 
   getRQTable(){
-    <table>
-      <thead>
-        <tr>
-          <td>Date</td>
-          <td>rQ</td>
-        </tr>
-      </thead>
-      <tbody>
-        { this.props.rqs.map(rq => {
-          return(
-            <tr key={ rq._id }>
-              <td>{ formatDate(rq.date) }</td>
-              <td>{ rq.value }</td>
-            </tr>
-          )
-        })}
-      </tbody>
-    </table>
+    return(
+      <table>
+        <thead>
+          <tr>
+            <td>Date</td>
+            <td>rQ</td>
+          </tr>
+        </thead>
+        <tbody>
+          { this.props.rqs.map(rq => {
+            return(
+              <tr key={ rq._id }>
+                <td>{ formatDate(rq.date) }</td>
+                <td>{ rq.value }</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    )
   }
 
   getLoading(){
-    <p>Loading...</p>
+    return <p>Loading...</p>
   }
 
   getError(){
-    <p>{ this.props.rqsError }</p>
+    return <p>{ this.props.rqsError }</p>
   }
 
   render(){

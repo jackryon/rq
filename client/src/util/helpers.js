@@ -9,8 +9,8 @@ export var formatDate = (d) => {
 
 export var getSpeedFromPace = (pace) => {
   var paceArray = pace.split(':')
-  var mins = parseInt(paceArray[0])
-  var secs = parseInt(paceArray[1])
+  var mins = parseInt(paceArray[0], 10)
+  var secs = parseInt(paceArray[1], 10)
   return mins + (secs/60)
 }
 

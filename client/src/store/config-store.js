@@ -13,6 +13,8 @@ export default function configureStore(){
 function initialState(){
   return {
     rqs: [],
-    rqsIsLoading: true
+    activeForm: 'rqForm',
+    rqsIsLoading: true,
+    rqsHasErrored: false
   }
 }

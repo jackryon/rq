@@ -17,7 +17,6 @@ export function rqsHasErrored(state = false, action){
 }
 
 export function rqsIsLoading(state = true, action){
-  debugger
   switch(action.type){
     case 'RQS_IS_LOADING':
       return action.rqsIsLoading
