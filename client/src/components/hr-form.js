@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { formatDate, postRQ, calculateRQ, getSpeedFromPace } from '../util/helpers'
+import { formatDate, postRQ, calculateRQ, getSpeedFromPace } from '../util'
 
 class PaceHRForm extends Component {
   constructor(props){

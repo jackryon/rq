@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { formatDate } from '../util/helpers'
+import { formatDate } from '../util'
 import { bindActionCreators } from 'redux'
 import { rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
 import { connect } from 'react-redux'

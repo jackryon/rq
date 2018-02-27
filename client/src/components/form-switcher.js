@@ -47,9 +47,7 @@ class FormSwitcher extends Component {
 }
 
 function mapStateToProps(state){
-  return {
-    activeForm: state.activeForm
-  }
+  return { activeForm: state.activeForm }
 }
 
 function mapDispatchToProps(dispatch){

@@ -1,4 +1,4 @@
-import { httpHeaders } from '../util/helpers'
+import { httpHeaders } from '../util'
 
 // ACTIONS
 
@@ -20,19 +20,18 @@ export const rqsPost = (rq, url) => {
   }
 }
 
-export const rqValsChanged = (name, value) => {
+export const defaultRQChanged = (e) => {
   return {
-    type: 'rq_vals_changed', {
-      name: name,
-      value: value
-    }
+    type: 'DEFAULT_RQ_CHANGED',
+    name: e.target.name,
+    value: e.target.value
   }
 }
 
 export const rqsPostSuccess = (rq) => {
   return {
     type: 'RQS_POST_SUCCESS',
-    rq
+    rq: rq
   }
 }
 
