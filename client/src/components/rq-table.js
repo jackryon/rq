@@ -11,9 +11,9 @@ class RQTable extends Component {
   }
 
   getUIForState(){
-    if(this.props.rqsLoading){
+    if(this.props.rqsIsLoading){
       return this.getLoading()
-    } else if(this.props.rqsError){
+    } else if(this.props.rqsHasError){
       return this.getError()
     } else {
       return this.getRQTable()

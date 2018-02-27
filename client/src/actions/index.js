@@ -7,7 +7,7 @@ export const switchForm = (activeForm) => {
   }
 }
 
-export const rqsIsLoading = (bool = true) => {
+export const rqsIsLoading = (bool) => {
   return {
     type: 'RQS_IS_LOADING',
     rqsIsLoading: bool
@@ -23,9 +23,14 @@ export const rqsHasErrored = (bool = true) => {
 
 export const rqsFetch = (url) => {
   return (dispatch) => {
-    dispatch(rqsIsLoading())
+    //dispatch(rqsIsLoading(true))
 
-    fetch(url).then((response) => {
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      }
+    }).then((response) => {
       if(!response.ok){
           throw Error(response.statusText)
       }
@@ -34,9 +39,15 @@ export const rqsFetch = (url) => {
 
       return response
     })
-    .then((response) => response.json())
-    .then((rqs) => dispatch(rqsFetchSuccess(rqs)))
-    .catch(() => dispatch(rqsHasErrored(true)))
+    .then((response) => {
+      return response.json()
+    })
+    .then((rqs) => {
+      dispatch(rqsFetchSuccess(JSON.parse(rqs)))
+    })
+    .catch(() => {
+      dispatch(rqsHasErrored(true))
+    })
   }
 }
 
