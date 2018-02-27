@@ -2,20 +2,19 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
-export const rqsPost = (rq, url) => {
+export const rqPost = (rq, url) => {
   return (dispatch) => {
-    fetch(url, { headers: httpHeaders() })
-      .then((response) => {
-        if(!response.ok) throw Error(response.statusText)
-        debugger
-        return response
+    fetch(url, {
+        headers: httpHeaders(),
+        method: 'POST',
+        body: JSON.stringify(rq)
       })
-      .then((response) => {
-        debugger
-        return response.json()
-      })
-      .then((rq) => {
-        debugger
+      .then(
+        response => response.json(),
+        error => console.log('An error occurred.', error)
+      )
+      .then((json) => {
+        dispatch(rqsFetch(url))
       })
   }
 }

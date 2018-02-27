@@ -2,27 +2,26 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { formatDate } from '../util'
 import { connect } from 'react-redux'
-import { defaultRQChanged } from '../actions'
+import { defaultRQChanged, rqPost } from '../actions'
 
 class RQForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-  }
-
-  handleChange(e){
-
+    this.props.rqPost(this.props.defaultRQ,
+      process.env.REACT_APP_API_ENDPOINT)
   }
 
   render(){
     return(
       <div className="col-xs-12">
-        <form id="rq-form" onSubmit={ (e) => this.handleSubmit(e) }>
+        <form id="rq-form"
+              onSubmit={ (e) => this.handleSubmit(e) }>
           <div>
             <label>rQ:</label>
             <input type="text"
-                  name="rq"
-                  value={ this.props.defaultRQ.rq }
+                  name="value"
+                  value={ this.props.defaultRQ.value }
                   onChange={ (e) => this.props.defaultRQChanged(e) } />
           </div>
 
@@ -49,6 +48,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     defaultRQChanged: defaultRQChanged,
+    rqPost: rqPost
   }, dispatch)
 }
 

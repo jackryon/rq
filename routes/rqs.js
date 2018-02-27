@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', (req, res, next) => {
   var rQ = new RQ({
-    value: req.body.rQ,
+    value: req.body.value,
     date: req.body.date
   })
 
