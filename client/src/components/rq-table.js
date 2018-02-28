@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { formatDate } from '../util'
 import { bindActionCreators } from 'redux'
-import { rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
+import { rqDelete, rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
 import { connect } from 'react-redux'
 
 class RQTable extends Component {
@@ -20,6 +20,12 @@ class RQTable extends Component {
     }
   }
 
+  handleLinkClick(e){
+    e.preventDefault()
+    var rqId = e.target.dataset['rqid']
+    this.props.rqDelete(process.env.REACT_APP_API_ENDPOINT + '/' + rqId)
+  }
+
   getRQTable(){
     return(
       <table>
@@ -27,6 +33,7 @@ class RQTable extends Component {
           <tr>
             <td>Date</td>
             <td>rQ</td>
+            <td>Actions</td>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +42,12 @@ class RQTable extends Component {
               <tr key={ rq._id }>
                 <td>{ formatDate(rq.date) }</td>
                 <td>{ rq.value }</td>
+                <td>
+                  <a href="#" data-rqid={ rq._id }
+                    onClick={ (e) => this.handleLinkClick(e) }>
+                    x
+                  </a>
+                </td>
               </tr>
             )
           })}
@@ -77,7 +90,8 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({
     rqsFetch: rqsFetch,
     rqsLoading: rqsIsLoading,
-    rqsError: rqsHasErrored
+    rqsError: rqsHasErrored,
+    rqDelete: rqDelete
   }, dispatch)
 }
 

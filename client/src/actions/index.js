@@ -2,20 +2,35 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
+export const rqDelete = (url) => {
+  return (dispatch) => {
+    fetch(url, {
+      method: 'DELETE',
+      headers: httpHeaders()
+    })
+    .then(
+      response => response.json(),
+      error => console.log('Error:', error)
+    ).then(
+      json => dispatch(rqsFetch(url))
+    )
+  }
+}
+
 export const rqPost = (rq, url) => {
   return (dispatch) => {
     fetch(url, {
-        headers: httpHeaders(),
-        method: 'POST',
-        body: JSON.stringify(rq)
-      })
-      .then(
-        response => response.json(),
-        error => console.log('An error occurred.', error)
-      )
-      .then((json) => {
-        dispatch(rqsFetch(url))
-      })
+      headers: httpHeaders(),
+      method: 'POST',
+      body: JSON.stringify(rq)
+    })
+    .then(
+      response => response.json(),
+      error => console.log('Error:', error)
+    )
+    .then((json) => {
+      dispatch(rqsFetch(url))
+    })
   }
 }
 
