@@ -4,16 +4,22 @@ import { Link } from 'react-router-dom'
 class Navigation extends Component {
   render(){
     return(
-      <div>
-        <Link to="/login">
-          Login
-        </Link>
-        <Link to="/input-data">
-          Input
-        </Link>
-        <Link to="/view-data">
-          View
-        </Link>
+      <div className="row" id="nav">
+        <div className="col-sm-2 no-pad">
+          <Link to="/login">
+            Login
+          </Link>
+        </div>
+        <div className="col-sm-2 no-pad">
+          <Link to="/input-data">
+            Input
+          </Link>
+        </div>
+        <div className="col-sm-2 no-pad">
+          <Link to="/view-data">
+            View
+          </Link>
+        </div>
       </div>
     )
   }

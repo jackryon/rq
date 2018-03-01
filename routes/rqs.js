@@ -12,7 +12,6 @@ router.delete('/:id', function(req, res, next){
 router.get('/', function(req, res, next){
   RQ.find({}, (err, rqs) => {
     if(err) throw err
-    //res.json(JSON.stringify(rqs))
     res.json(rqs)
   })
 })

@@ -1,16 +1,27 @@
 body
   color: #444
 
+  .inline-block
+    display: inline-block
+
   h3
     color: #F94D1F
 
   header
     h1
-      margin: 1em 0
+      margin-top: 1em
       color: #F94D1F
 
   .hidden
     display: none
+
+  #nav
+    margin-top: 10px
+    margin-bottom: 40px
+
+    .no-pad
+      padding-left: 0
+      padding-right: 0
 
   table
     td
@@ -27,16 +38,21 @@ body
 
       #pace-hr-form
         label
-          width: 160px
+          width: 175px
+
+        input[type="submit"]
+          margin-left: 130px
+          margin-top: 20px
 
       input[type="text"]
         padding: 5px
 
       input[type="submit"]
-        margin: 10px 0
+        margin: 15px 90px
 
     label
       padding-right: 40px
+      padding-left: 15px
 
     input[type="radio"]
       width: 22px

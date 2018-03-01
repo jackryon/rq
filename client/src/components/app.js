@@ -11,20 +11,6 @@ import InputData from './input-data'
 import ViewData from './view-data'
 
 class App extends Component {
-  getActiveView(){
-    switch(this.props.activeView){
-      case 'LOGIN':
-        return <Login />
-      case 'REGISTRATION':
-        return <Registration />
-      case 'INPUT_DATA':
-        return <InputData />
-      case 'VIEW_DATA':
-        return <ViewData />
-      default:
-        return <Login />
-    }
-  }
 
   render(){
     return(
@@ -35,12 +21,7 @@ class App extends Component {
               <h1>Welcome to rQ App</h1>
             </header>
           </div>
-          <div className="row">
-            <Navigation />
-          </div>
-          <div className="row">
-            { this.getActiveView() }
-          </div>
+          <Navigation />
           <Route path="/login" component={ Login } />
           <Route path="/registration" component={ Registration } />
           <Route path="/input-data" component={ InputData } />

@@ -19,9 +19,9 @@ class FormSwitcher extends Component {
     var activeForm = this.props.activeForm
 
     return(
-      <div id="form-switcher">
-        <div className="row" >
-          <div className="col-xs-12">
+      <div id="form-switcher" className="row">
+        <div className="col-xs-12">
+          <div className="row">
             <label>
               <input type="radio"
                 checked={ activeForm === 'rqForm' }
@@ -37,9 +37,11 @@ class FormSwitcher extends Component {
               Enter Pace & Avg HR
             </label>
           </div>
-        </div>
-        <div className="row" id="form-container">
-          { this.getActiveForm() }
+          <div className="row">
+            <div className="col-xs-12" id="form-container">
+              { this.getActiveForm() }
+            </div>
+          </div>
         </div>
       </div>
     )
