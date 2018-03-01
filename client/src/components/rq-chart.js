@@ -13,11 +13,19 @@ class RQChart extends React.Component {
 
   chartConfig(){
     return {
-      yAxis: {
-        type: 'datetime'
+      title: {
+        text: 'rQ'
+      },
+      xAxis: {
+        type: 'datetime',
+        labels: {
+          format: '{value:%Y-%m-%d}',
+          rotation: 45,
+          align: 'left'
+        }
       },
       series: [{
-        type: 'area',
+        type: 'spline',
         name: 'rQ',
         data: this.props.chartRQs
       }]
