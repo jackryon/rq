@@ -10,7 +10,7 @@ router.delete('/:id', function(req, res, next){
 })
 
 router.get('/', function(req, res, next){
-  RQ.find({}, (err, rqs) => {
+  RQ.find({}, null, { sort: 'date' }, (err, rqs) => {
     if(err) throw err
     res.json(rqs)
   })

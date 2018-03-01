@@ -1,14 +1,10 @@
 import React, { Component } from 'react'
 import { formatDate } from '../util'
 import { bindActionCreators } from 'redux'
-import { rqDelete, rqsIsLoading, rqsHasErrored, rqsFetch } from '../actions/index'
 import { connect } from 'react-redux'
+import { rqDelete } from '../actions'
 
 class RQTable extends Component {
-
-  componentDidMount(){
-    this.props.rqsFetch(process.env.REACT_APP_API_ENDPOINT)
-  }
 
   getUIForState(){
     if(this.props.rqsIsLoading){
@@ -79,19 +75,12 @@ class RQTable extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-    rqs: state.rqs,
-    rqsIsLoading: state.rqsIsLoading,
-    rqsError: state.rqsError
-  }
+const mapStateToProps = (state) => {
+  return {}
 }
 
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    rqsFetch: rqsFetch,
-    rqsLoading: rqsIsLoading,
-    rqsError: rqsHasErrored,
     rqDelete: rqDelete
   }, dispatch)
 }
