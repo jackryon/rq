@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
-import { formatDate } from '../util'
 import { connect } from 'react-redux'
 import { defaultRQChanged, rqPost } from '../actions'
 

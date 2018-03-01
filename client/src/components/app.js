@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { BrowserRouter, Route } from 'react-router-dom'
-import FormSwitcher from './form-switcher'
-import RQChart from './rq-chart'
-import RQTable from './rq-table'
 import Navigation from './navigation'
 import Login from './login'
 import Registration from './registration'
@@ -32,14 +28,4 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state){
-  return {
-    activeView: state.activeView
-  }
-}
-
-function mapDispatchToProps(dispatch){
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App

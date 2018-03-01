@@ -12,12 +12,12 @@ class Navigation extends Component {
         </div>
         <div className="col-sm-2 no-pad">
           <Link to="/input-data">
-            Input
+            Input Data
           </Link>
         </div>
         <div className="col-sm-2 no-pad">
           <Link to="/view-data">
-            View
+            View Data
           </Link>
         </div>
       </div>
