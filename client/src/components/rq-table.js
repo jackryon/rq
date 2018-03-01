@@ -23,7 +23,7 @@ class RQTable extends Component {
   handleLinkClick(e){
     e.preventDefault()
     var rqId = e.target.dataset['rqid']
-    this.props.rqDelete(process.env.REACT_APP_API_ENDPOINT + '/' + rqId)
+    this.props.rqDelete(rqId, process.env.REACT_APP_API_ENDPOINT)
   }
 
   getRQTable(){
@@ -43,7 +43,8 @@ class RQTable extends Component {
                 <td>{ formatDate(rq.date) }</td>
                 <td>{ rq.value }</td>
                 <td>
-                  <a href="#" data-rqid={ rq._id }
+                  <a data-rqid={ rq._id }
+                    href="#"
                     onClick={ (e) => this.handleLinkClick(e) }>
                     x
                   </a>

@@ -2,9 +2,16 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
-export const rqDelete = (url) => {
+export const activeView = (newView) => {
+  return {
+    type: 'ACTIVE_VIEW',
+    activeView: newView
+  }
+}
+
+export const rqDelete = (rqId, url) => {
   return (dispatch) => {
-    fetch(url, {
+    fetch(url + '/' + rqId, {
       method: 'DELETE',
       headers: httpHeaders()
     })
@@ -28,9 +35,9 @@ export const rqPost = (rq, url) => {
       response => response.json(),
       error => console.log('Error:', error)
     )
-    .then((json) => {
-      dispatch(rqsFetch(url))
-    })
+    .then(
+      json => dispatch(rqsFetch(url))
+    )
   }
 }
 
@@ -52,7 +59,7 @@ export const rqsPostSuccess = (rq) => {
 export const switchForm = (activeForm) => {
   return {
     type: 'SWITCH_FORMS',
-    payload: activeForm
+    activeForm: activeForm
   }
 }
 
@@ -74,21 +81,24 @@ export const rqsFetch = (url) => {
   return (dispatch) => {
     dispatch(rqsIsLoading(true))
 
-    fetch(url, { headers: httpHeaders() })
-      .then((response) => {
-        if(!response.ok) throw Error(response.statusText)
+    fetch(url, {
+      headers: httpHeaders()
+    })
+    .then(
+      (response) => {
         dispatch(rqsIsLoading(false))
-        return response
-      })
-      .then((response) => {
         return response.json()
-      })
-      .then((rqs) => {
-        dispatch(rqsFetchSuccess(JSON.parse(rqs)))
-      })
-      .catch(() => {
-        dispatch(rqsHasErrored(true))
-      })
+      },
+      error => console.log('Error:', error)
+    )
+    .then(
+      json => {
+        dispatch(rqsFetchSuccess(json))
+      }
+    )
+    .catch(
+      error => dispatch(rqsHasErrored(true))
+    )
   }
 }
 
