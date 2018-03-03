@@ -7,10 +7,6 @@ class RQChart extends React.Component {
     this.chart = this.refs.chart.getChart();
   }
 
-  componentWillUnmount(){
-    //this.chart.destroy()
-  }
-
   chartConfig(){
     return {
       title: {
@@ -41,12 +37,6 @@ class RQChart extends React.Component {
       </div>
     )
   }
-}
-
-const prepRQsForChart = (rqs) => {
-  rqs.map(rq => {
-    [rq.date, rq.value]
-  })
 }
 
 export default RQChart

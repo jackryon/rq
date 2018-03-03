@@ -18,7 +18,7 @@ export let getSpeedFromPace = (pace) => {
   var paceArray = pace.split(':')
   var mins = parseInt(paceArray[0], 10)
   var secs = parseInt(paceArray[1], 10)
-  return mins + (secs/60)
+  return 60 / (mins + (secs/60))
 }
 
 export let calculateRQ = (speed, heartRate) => {

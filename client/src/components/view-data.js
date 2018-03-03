@@ -3,7 +3,7 @@ import RQChart from './rq-chart'
 import RQTable from './rq-table'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { rqsFetch, rqDelete } from '../actions'
+import { rqsFetch } from '../actions'
 
 class ViewData extends React.Component {
 

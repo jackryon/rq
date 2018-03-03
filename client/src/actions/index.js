@@ -25,6 +25,7 @@ export const rqDelete = (rqId, url) => {
 }
 
 export const rqPost = (rq, url) => {
+  debugger
   return (dispatch) => {
     fetch(url, {
       headers: httpHeaders(),

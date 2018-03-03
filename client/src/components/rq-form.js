@@ -7,8 +7,11 @@ class RQForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-    this.props.rqPost(this.props.defaultRQ,
-      process.env.REACT_APP_API_ENDPOINT)
+
+    this.props.rqPost(
+      this.props.defaultRQ,
+      process.env.REACT_APP_API_ENDPOINT
+    )
   }
 
   render(){
@@ -19,17 +22,16 @@ class RQForm extends Component {
           <div>
             <label>rQ:</label>
             <input type="text"
-                  name="value"
-                  value={ this.props.defaultRQ.value }
-                  onChange={ (e) => this.props.defaultRQChanged(e) } />
+              name="value"
+              value={ this.props.defaultRQ.value }
+              onChange={ (e) => this.props.defaultRQChanged(e) } />
           </div>
-
           <div>
             <label>Date:</label>
             <input type="text"
-                  name="date"
-                  value={ this.props.defaultRQ.date }
-                  onChange={ (e) => this.props.defaultRQChanged(e) } />
+              name="date"
+              value={ this.props.defaultRQ.date }
+              onChange={ (e) => this.props.defaultRQChanged(e) } />
           </div>
           <div>
             <input type="submit" name="submit" className="btn btn-primary" />
