@@ -49,6 +49,14 @@ export const defaultRQChanged = (e) => {
   }
 }
 
+export const defaultHRDataChanged = (e) => {
+  return {
+    type: 'DEFAULT_HR_DATA_CHANGED',
+    name: e.target.name,
+    value: e.target.value
+  }
+}
+
 export const rqsPostSuccess = (rq) => {
   return {
     type: 'RQS_POST_SUCCESS',
