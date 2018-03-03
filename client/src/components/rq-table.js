@@ -24,32 +24,34 @@ class RQTable extends Component {
 
   getRQTable(){
     return(
-      <table>
-        <thead>
-          <tr>
-            <td>Date</td>
-            <td>rQ</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          { this.props.rqs.map(rq => {
-            return(
-              <tr key={ rq._id }>
-                <td>{ formatDate(rq.date) }</td>
-                <td>{ rq.value }</td>
-                <td>
-                  <a data-rqid={ rq._id }
-                    href="#"
-                    onClick={ (e) => this.handleLinkClick(e) }>
-                    x
-                  </a>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
+      <div className="table-scroller">
+        <table>
+          <thead>
+            <tr>
+              <td>Date</td>
+              <td>rQ</td>
+              <td>Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            { this.props.rqs.map(rq => {
+              return(
+                <tr key={ rq._id }>
+                  <td>{ formatDate(rq.date) }</td>
+                  <td>{ rq.value }</td>
+                  <td>
+                    <a data-rqid={ rq._id }
+                      href="#"
+                      onClick={ (e) => this.handleLinkClick(e) }>
+                      x
+                    </a>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
+      </div>
     )
   }
 

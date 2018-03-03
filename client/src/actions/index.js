@@ -2,6 +2,13 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
+export const showFlashMessage = (msg) => {
+  return {
+    type: 'SHOW_FLASH_MESSAGE',
+    msg: msg
+  }
+}
+
 export const activeView = (newView) => {
   return {
     type: 'ACTIVE_VIEW',
@@ -25,7 +32,6 @@ export const rqDelete = (rqId, url) => {
 }
 
 export const rqPost = (rq, url) => {
-  debugger
   return (dispatch) => {
     fetch(url, {
       headers: httpHeaders(),
