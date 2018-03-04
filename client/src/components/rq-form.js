@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { defaultRQChanged, rqPost } from '../actions'
+import { flashMessage } from '../actions'
 
 class RQForm extends Component {
 
@@ -49,7 +50,8 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionCreators({
     defaultRQChanged: defaultRQChanged,
-    rqPost: rqPost
+    rqPost: rqPost,
+    flashMessage: flashMessage
   }, dispatch)
 }
 

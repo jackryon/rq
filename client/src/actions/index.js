@@ -2,10 +2,28 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
-export const showFlashMessage = (msg) => {
+export const flashMessage = (message) => {
+  return (dispatch) => {
+    dispatch(setFlashMessage(message))
+    dispatch(setFlashClass('visible'))
+
+    setTimeout(() => {
+      dispatch(setFlashClass('hidden'))
+    }, 1000)
+  }
+}
+
+export const setFlashMessage = (message) => {
   return {
-    type: 'SHOW_FLASH_MESSAGE',
-    msg: msg
+    type: 'FLASH_MESSAGE',
+    message: message
+  }
+}
+
+export const setFlashClass = (flashClass) => {
+  return {
+    type: 'FLASH_CLASS',
+    flashClass: flashClass
   }
 }
 
@@ -26,7 +44,10 @@ export const rqDelete = (rqId, url) => {
       response => response.json(),
       error => console.log('Error:', error)
     ).then(
-      json => dispatch(rqsFetch(url))
+      json => {
+        dispatch(rqsFetch(url))
+        dispatch(flashMessage('RQ Deleted!'))
+      }
     )
   }
 }
@@ -43,7 +64,10 @@ export const rqPost = (rq, url) => {
       error => console.log('Error:', error)
     )
     .then(
-      json => dispatch(rqsFetch(url))
+      json => {
+        dispatch(rqsFetch(url))
+        dispatch(flashMessage('RQ Saved!'))
+      }
     )
   }
 }
@@ -61,13 +85,6 @@ export const defaultHRDataChanged = (e) => {
     type: 'DEFAULT_HR_DATA_CHANGED',
     name: e.target.name,
     value: e.target.value
-  }
-}
-
-export const rqsPostSuccess = (rq) => {
-  return {
-    type: 'RQS_POST_SUCCESS',
-    rq: rq
   }
 }
 

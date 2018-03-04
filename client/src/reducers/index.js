@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import { rqs, rqsIsLoading, rqsHasErrored } from './reducer-rqs'
 import { defaultRQ } from './reducer-default-rq'
 import { defaultHRData } from './reducer-default-hr-data'
+import { flashMessage, flashClass } from './reducer-flash-message'
 
 export default combineReducers({
   activeForm,
@@ -10,5 +11,7 @@ export default combineReducers({
   rqsIsLoading,
   rqsHasErrored,
   defaultRQ,
-  defaultHRData
+  defaultHRData,
+  flashMessage,
+  flashClass
 })
