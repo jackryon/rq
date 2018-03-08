@@ -1,6 +1,6 @@
-var express = require('express')
-var router = express.Router()
-var RQ = require('../schema/RQ')
+var express = require('express'),
+  router = express.Router(),
+  RQ = require('../models/rq')
 
 router.delete('/:id', function(req, res, next){
   RQ.remove({ _id: req.params.id }, function(err) {
