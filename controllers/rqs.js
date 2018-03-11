@@ -1,22 +1,20 @@
-var express = require('express'),
-  router = express.Router(),
-  RQ = require('../models/rq')
+let RQ = require('../models/rq')
 
-router.delete('/:id', function(req, res, next){
-  RQ.remove({ _id: req.params.id }, function(err) {
+exports.destroy = (req, res) => {
+  RQ.remove({ _id: req.params.id }, (err) => {
     if(err) throw err
     res.json({ msg: 'rq deleted' })
   })
-})
+}
 
-router.get('/', function(req, res, next){
+exports.index = (req, res) => {
   RQ.find({}, null, { sort: 'date' }, (err, rqs) => {
-    if(err) throw err
+    if(err) res.status(500).json({ msg: err })
     res.json(rqs)
   })
-})
+}
 
-router.post('/', (req, res, next) => {
+exports.create = (req, res) => {
   var rq = new RQ({
     value: req.body.value,
     date: req.body.date
@@ -26,6 +24,4 @@ router.post('/', (req, res, next) => {
     if(err) return res.json(err)
     res.json({ msg: 'rq saved!'})
   })
-})
-
-module.exports = router
+}

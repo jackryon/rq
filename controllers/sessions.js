@@ -1,12 +1,34 @@
-let express = require('express'),
-  router = express.Router()
+let jwt = require('jsonwebtoken'),
+  User = require('../models/user'),
+  errorMsg = 'user/password not found'
 
-router.post('/', (req, res) => {
+exports.create = (req, res) => {
   return res.json({ msg: 'session create' })
-})
 
-router.delete('/', (req, res) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if(err) return res.status(500).json({ msg: err })
+    if(!user) return res.status(401).json({ msg: errorMsg })
+
+    if(!user.comparePassword(req.body.password)){
+      return res.status(401).json({ msg: errorMsg })
+    } else {
+      return res.json({ token: jwt.sign({
+        _id: user._id,
+        email: user.email,
+        fullName: user.fullName
+      }, 'RESTFULAPIs')})
+    }
+  })
+}
+
+exports.destroy = (req, res) => {
   return res.json({ msg: 'session delete' })
-})
+}
 
-module.exports = router
+const assertLoggedIn = (req, res, next) => {
+  if(req.user){
+    next()
+  } else {
+    return res.status(401).json({ msg: 'unauthorized' })
+  }
+}

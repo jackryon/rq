@@ -5,10 +5,8 @@ var mongoose = require('mongoose'),
   logger = require('morgan'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
-  rQs = require('./controllers/rqs'),
-  users = require('./controllers/users'),
-  sessions = require('./controllers/sessions'),
   app = express(),
+  appRouter = require('./routers/app-router'),
   mongoDB = 'mongodb://127.0.0.1/rq'
 
 mongoose.connect(mongoDB)
@@ -20,19 +18,18 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
-app.use('/api/rqs', rQs)
-app.use('/api/users', users)
-app.use('/api/sessions', sessions)
+
+appRouter.draw(app)
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
   res.status(err.status || 500)
