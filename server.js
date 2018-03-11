@@ -1,14 +1,15 @@
-var mongoose = require('mongoose')
-var express = require('express')
-var path = require('path')
-var favicon = require('serve-favicon')
-var logger = require('morgan')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
-var rQs = require('./controllers/rqs')
-var users = require('./controllers/users')
-var app = express()
-var mongoDB = 'mongodb://127.0.0.1/rq'
+var mongoose = require('mongoose'),
+  express = require('express'),
+  path = require('path'),
+  favicon = require('serve-favicon'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
+  rQs = require('./controllers/rqs'),
+  users = require('./controllers/users'),
+  sessions = require('./controllers/sessions'),
+  app = express(),
+  mongoDB = 'mongodb://127.0.0.1/rq'
 
 mongoose.connect(mongoDB)
 mongoose.Promise = global.Promise
@@ -21,6 +22,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 app.use('/api/rqs', rQs)
 app.use('/api/users', users)
+app.use('/api/sessions', sessions)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
