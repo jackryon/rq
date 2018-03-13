@@ -4,6 +4,7 @@ import { rqs, rqsIsLoading, rqsHasErrored } from './reducer-rqs'
 import { defaultRQ } from './reducer-default-rq'
 import { defaultHRData } from './reducer-default-hr-data'
 import { flashMessage, flashClass } from './reducer-flash-message'
+import { loginData } from './reducer-login-data'
 
 export default combineReducers({
   activeForm,
@@ -13,5 +14,6 @@ export default combineReducers({
   defaultRQ,
   defaultHRData,
   flashMessage,
-  flashClass
+  flashClass,
+  loginData
 })

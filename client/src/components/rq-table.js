@@ -19,7 +19,7 @@ class RQTable extends Component {
   handleLinkClick(e){
     e.preventDefault()
     var rqId = e.target.dataset['rqid']
-    this.props.rqDelete(rqId, process.env.REACT_APP_API_ENDPOINT)
+    this.props.rqDelete(rqId, '/api/rqs')
   }
 
   getRQTable(){

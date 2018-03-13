@@ -16,9 +16,8 @@ class PaceHRForm extends React.Component {
     let rqVal = calculateRQ(speed, this.props.defaultHRData.hr)
     rqVal = Math.round(rqVal * 100) / 100
     let rq = { value: rqVal, date: this.props.defaultHRData.date }
-    this.props.rqPost(rq, process.env.REACT_APP_API_ENDPOINT)
+    this.props.rqPost(rq, '/api/rqs')
   }
-
 
   render(){
     return(

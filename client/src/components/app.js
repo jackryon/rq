@@ -22,7 +22,7 @@ class App extends Component {
             </div>
             <Navigation />
             <Route path="/login" component={ Login } />
-            <Route path="/registration" component={ Registration } />
+            <Route path="/register" component={ Registration } />
             <Route path="/input-data" component={ InputData } />
             <Route path="/view-data" component={ ViewData } />
           </div>

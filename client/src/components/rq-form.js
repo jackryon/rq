@@ -9,10 +9,7 @@ class RQForm extends Component {
   handleSubmit(e){
     e.preventDefault()
 
-    this.props.rqPost(
-      this.props.defaultRQ,
-      process.env.REACT_APP_API_ENDPOINT
-    )
+    this.props.rqPost(this.props.defaultRQ, '/api/rqs')
   }
 
   render(){

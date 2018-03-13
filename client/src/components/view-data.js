@@ -8,7 +8,7 @@ import { rqsFetch } from '../actions'
 class ViewData extends React.Component {
 
   componentDidMount(){
-    this.props.rqsFetch(process.env.REACT_APP_API_ENDPOINT)
+    this.props.rqsFetch('/api/rqs')
   }
 
   render(){

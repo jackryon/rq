@@ -2,6 +2,40 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
+export const login = (data, url) => {
+  return(dispatch) => {
+    fetch(url, {
+      method: 'POST',
+      headers: httpHeaders()
+    })
+    .then(
+      response => response.json(),
+      error => console.error(error)
+    )
+    .then(
+      json => {
+        debugger
+      }
+    )
+  }
+}
+
+export const register = () => {
+
+}
+
+export const loggedIn = () => {
+
+}
+
+export const setLoginData = (e) => {
+  return {
+    type: 'LOGIN_DATA',
+    name: e.target.name,
+    value: e.target.value
+  }
+}
+
 export const flashMessage = (message) => {
   return (dispatch) => {
     dispatch(setFlashMessage(message))
@@ -41,10 +75,14 @@ export const rqDelete = (rqId, url) => {
       headers: httpHeaders()
     })
     .then(
-      response => response.json(),
-      error => console.log('Error:', error)
+      (response) => {
+        response.json()
+      },
+      (error) => {
+        console.log('Error:', error)
+      }
     ).then(
-      json => {
+      (json) => {
         dispatch(rqsFetch(url))
         dispatch(flashMessage('RQ Deleted!'))
       }
