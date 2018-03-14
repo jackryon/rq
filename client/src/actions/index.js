@@ -3,7 +3,7 @@ import { httpHeaders } from '../util'
 // ACTIONS
 
 export const login = (data, url) => {
-  return(dispatch) => {
+  return (dispatch) => {
     fetch(url, {
       method: 'POST',
       headers: httpHeaders()
@@ -14,14 +14,34 @@ export const login = (data, url) => {
     )
     .then(
       json => {
-        debugger
+        if(json.error) return dispatch(flashMessage(json.error.message, 3000))
       }
     )
   }
 }
 
-export const register = () => {
+export const register = (data, url) => {
+  return (dispatch) => {
+    fetch(url, {
+      method: 'POST',
+      headers: httpHeaders(),
+      body: JSON.stringify(data)
+    })
+    .then(
+      response => response.json(),
+      error => console.log(error)
+    )
+    .then(
+      json => {
+        if(json.errors) return dispatch(flashMessage(json.message, 3000))
+        console.log(json)
+      }
+    )
+  }
+}
 
+export const registrationError = (error) => {
+  flashMessage(error.message)
 }
 
 export const loggedIn = () => {
@@ -36,14 +56,14 @@ export const setLoginData = (e) => {
   }
 }
 
-export const flashMessage = (message) => {
+export const flashMessage = (message, delay = 1000) => {
   return (dispatch) => {
     dispatch(setFlashMessage(message))
     dispatch(setFlashClass('visible'))
 
     setTimeout(() => {
       dispatch(setFlashClass('hidden'))
-    }, 1000)
+    }, delay)
   }
 }
 

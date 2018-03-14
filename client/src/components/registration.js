@@ -2,9 +2,10 @@ import React from 'react'
 import LoginRegisterForm from './login-register-form'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { setLoginData } from '../actions'
+import { setLoginData, register } from '../actions'
 
 class Registration extends React.Component {
+
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -12,23 +13,19 @@ class Registration extends React.Component {
   }
 
   handleSubmit(e) {
-    debugger
+    e.preventDefault()
+    this.props.register(this.props.loginData, '/api/users')
   }
 
   handleInputChange(e) {
     e.preventDefault()
-    debugger
     this.props.setLoginData(e)
   }
 
-  render(){
+  render() {
     return(
       <div>
-        <LoginRegisterForm
-          handleInputChange={ this.handleInputChange }
-          handleSubmit={ this.handleSubmit }
-          loginData={ this.props.loginData }
-          buttonLabel="Register"/>
+        reg form
       </div>
     )
   }
@@ -36,7 +33,8 @@ class Registration extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    setLoginData: setLoginData
+    setLoginData: setLoginData,
+    register: register
   }, dispatch)
 }
 

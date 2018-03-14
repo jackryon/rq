@@ -8,19 +8,23 @@ exports.create = (req, res) => {
 
     if(!user) {
       console.log('bad email')
-      return res.status(401).json({ msg: errorMsg })
+      return res.status(401).json({
+        msg: errorMsg, error: { message: errorMsg }
+      })
     }
 
     if(!user.comparePassword(req.body.password)) {
       console.log('bad password')
-      return res.status(401).json({ msg: errorMsg })
-    } else {
-      return res.json({ token: jwt.sign({
-        _id: user._id,
-        email: user.email,
-        fullName: user.fullName
-      }, 'RESTFULAPIs')})
+      return res.status(401).json({
+        msg: errorMsg, error: { message: errorMsg }
+      })
     }
+
+    return res.json({ token: jwt.sign({
+      _id: user._id,
+      email: user.email,
+      fullName: user.fullName
+    }, 'RESTFULAPIs')})
   })
 }
 

@@ -6,30 +6,41 @@ import { Link } from 'react-router-dom'
 import LoginRegisterForm from './login-register-form'
 
 class Login extends React.Component {
-  constructor() {
-    super()
-    this.handleInputChange.bind(this)
-    this.handleSubmit.bind(this)
-  }
 
-  handleSubmit(e){
+  handleSubmit(e) {
     e.preventDefault()
     this.props.login(e, '/api/sessions')
   }
 
-  handleInputChange(e){
+  handleInputChange(e) {
     e.preventDefault()
     this.props.setLoginData(e)
   }
 
-  render(){
+  render() {
     return(
       <div>
-        <LoginRegisterForm
-          handleSubmit={ this.handleSubmit }
-          handleInputChange={ this.handleInputChange }
-          loginData={ this.props.loginData }
-          buttonLabel="Login" />
+        <form onSubmit={ (e) => this.handleSubmit(e) }>
+          <div>
+            <label>Email</label><br />
+            <input type="text"
+              onChange={ (e) => this.handleInputChange(e) }
+              name="email"
+              value={ this.props.loginData.email } />
+          </div>
+          <div>
+            <label>Password</label><br />
+            <input type="password"
+              onChange={ (e) => this.handleInputChange(e) }
+              name="password"
+              value={ this.props.loginData.password } />
+          </div>
+          <div>
+            <input type="submit"
+              value={ this.props.buttonLabel }
+              className="btn btn-primary" />
+          </div>
+        </form>
         <p>or <Link to="/register">Register Here </Link></p>
       </div>
     )
