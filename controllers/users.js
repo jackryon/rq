@@ -19,6 +19,7 @@ exports.destroy = (req, res) => {
 }
 
 exports.create = (req, res) => {
+  console.log('###', req.body)
   let user = new User(req.body)
   user.hashPassword = bcrypt.hashSync(req.body.password, 10)
 

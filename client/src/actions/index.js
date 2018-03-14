@@ -34,14 +34,17 @@ export const register = (data, url) => {
     .then(
       json => {
         if(json.errors) return dispatch(flashMessage(json.message, 3000))
-        console.log(json)
       }
     )
   }
 }
 
-export const registrationError = (error) => {
-  flashMessage(error.message)
+export const setRegistrationData = (e) => {
+  return {
+    type: 'REGISTRATION_DATA',
+    name: e.target.name,
+    value: e.target.value
+  }
 }
 
 export const loggedIn = () => {

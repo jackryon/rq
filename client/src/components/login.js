@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { setLoginData, login } from '../actions'
 import { Link } from 'react-router-dom'
-import LoginRegisterForm from './login-register-form'
 
 class Login extends React.Component {
 

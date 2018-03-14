@@ -5,6 +5,11 @@ export var httpHeaders = () => {
   }
 }
 
+export let validateEmail = (email) => {
+  let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  return emailRegex.test(email)
+}
+
 export let formatDate = (d) => {
   d = new Date(d)
   var mins = (d.getMinutes() < 10 ? '0': '') + d.getMinutes()
