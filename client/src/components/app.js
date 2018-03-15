@@ -6,10 +6,11 @@ import Registration from './registration'
 import InputData from './input-data'
 import ViewData from './view-data'
 import FlashMessages from './flash-messages'
+import Users from './admin/users'
 
 class App extends Component {
 
-  render(){
+  render() {
     return(
       <BrowserRouter>
         <div>
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/register" component={ Registration } />
             <Route path="/input-data" component={ InputData } />
             <Route path="/view-data" component={ ViewData } />
+            <Route path="/users" component={ Users } />
           </div>
         </div>
       </BrowserRouter>

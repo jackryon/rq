@@ -2,6 +2,30 @@ import { httpHeaders } from '../util'
 
 // ACTIONS
 
+export const getUsers = (url) => {
+  return (dispatch) => {
+    fetch(url, {
+      headers: httpHeaders()
+    })
+    .then(
+      response => response.json(),
+      error => console.log(error)
+    )
+    .then(
+      json => {
+        console.log(json)
+      }
+    )
+  }
+}
+
+export const users = (data) => {
+  return {
+    type: 'ADMIN_USERS',
+    users: data
+  }
+}
+
 export const login = (data, url) => {
   return (dispatch) => {
     fetch(url, {

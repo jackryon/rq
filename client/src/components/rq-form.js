@@ -8,7 +8,6 @@ class RQForm extends Component {
 
   handleSubmit(e){
     e.preventDefault()
-
     this.props.rqPost(this.props.defaultRQ, '/api/rqs')
   }
 

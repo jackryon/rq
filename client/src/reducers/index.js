@@ -6,6 +6,7 @@ import { defaultHRData } from './reducer-default-hr-data'
 import { flashMessage, flashClass } from './reducer-flash-message'
 import { loginData } from './reducer-login-data'
 import { registrationData } from './reducer-registration-data'
+import { adminUsers } from './reducer-admin-users'
 
 export default combineReducers({
   activeForm,
@@ -17,5 +18,6 @@ export default combineReducers({
   flashMessage,
   flashClass,
   loginData,
-  registrationData
+  registrationData,
+  adminUsers
 })
