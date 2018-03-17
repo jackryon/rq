@@ -9,8 +9,6 @@ exports.index = (req, res) => {
   })
 }
 
-// todo: add show func
-
 exports.destroy = (req, res) => {
   User.remove({ _id: req.params.id }, (err) => {
     if(err) res.status(500).json({ msg: err })
