@@ -8,3 +8,9 @@ exports.index = (req, res) => {
   })
 }
 
+exports.destroy = (req, res) => {
+  User.remove({ _id: req.params.id }, (err) => {
+    if(err) res.status(500).json({ msg: err })
+    res.json({ id: req.params.id })
+  })
+}

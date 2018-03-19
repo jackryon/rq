@@ -4,12 +4,12 @@ let users = require('../controllers/users'),
   rqs = require('../controllers/rqs')
 
 exports.draw = (app) => {
+
   app.route('/api/users')
     .post(users.create)
 
   app.route('/api/users/:id')
     .put(users.update)
-    .delete(users.destroy)
 
   app.route('/api/rqs')
     .post(rqs.create)
@@ -21,7 +21,11 @@ exports.draw = (app) => {
   app.route('/api/sessions')
     .post(sessions.create)
 
+
 	// ADMIN
 	app.route('/api/admin/users')
 		.get(adminUsers.index)
+
+  app.route('/api/admin/users/:id')
+    .delete(adminUsers.destroy)
 }

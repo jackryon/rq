@@ -1,12 +1,20 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { getUsers } from '../../actions'
+import { adminGetUsers, adminDeleteUser } from '../../actions'
+import { formatDate } from '../../util'
 
 class Users extends React.Component {
 
   componentDidMount() {
-    this.props.getUsers('/api/admin/users')
+    this.props.adminGetUsers('/api/admin/users')
+  }
+
+  handleDeleteUser(e) {
+    if(window.confirm('Are you really sure you want to do that?')) {
+      let userId = e.target.dataset['userid']
+      this.props.adminDeleteUser('/api/admin/users', userId)
+    }
   }
 
   render() {
@@ -18,6 +26,8 @@ class Users extends React.Component {
               <td>email</td>
               <td>full name</td>
               <td>created</td>
+              <td>confirmed?</td>
+              <td>actions</td>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +36,13 @@ class Users extends React.Component {
 								<tr key={ user._id }>
                   <td>{ user.email }</td>
                   <td>{ user.fullName }</td>
-                  <td>{ user.createdAt }</td>
+                  <td>{ formatDate(user.createdAt) }</td>
+                  <td>{ user.confirmed === true ? 'true' : 'false' }</td>
+                  <td>
+                    <a href="#"
+                      data-userid={ user._id }
+                      onClick={ e => this.handleDeleteUser(e) }>X</a>
+                  </td>
                 </tr>
               )
             })}
@@ -39,13 +55,14 @@ class Users extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    adminUsers: state.adminUsers
+    adminUsers: state.adminUsers,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    getUsers: getUsers
+    adminGetUsers: adminGetUsers,
+    adminDeleteUser: adminDeleteUser
   }, dispatch)
 }
 

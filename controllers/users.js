@@ -1,13 +1,6 @@
 let bcrypt = require('bcrypt'),
   User = require('../models/user')
 
-exports.destroy = (req, res) => {
-  User.remove({ _id: req.params.id }, (err) => {
-    if(err) res.status(500).json({ msg: err })
-    res.json({ id: req.params.id })
-  })
-}
-
 exports.create = (req, res) => {
   let user = new User(req.body)
   user.hashPassword = bcrypt.hashSync(req.body.password, 10)

@@ -1,19 +1,36 @@
 import { httpHeaders } from '../util'
 
-// ACTIONS
-
-export const getUsers = (url) => {
+export const adminGetUsers = (url) => {
   return (dispatch) => {
     fetch(url, {
       headers: httpHeaders()
     })
     .then(
       response => response.json(),
-      error => console.log(error)
+      error => console.error(error)
     )
     .then(
       json => {
 				dispatch(adminUsers(json))
+      }
+    )
+  }
+}
+
+export const adminDeleteUser = (url, id) => {
+  return (dispatch) => {
+    fetch(url + '/' + id, {
+      headers: httpHeaders(),
+      method: 'DELETE'
+    })
+    .then(
+      response => response.json(),
+      error => console.error(error)
+    )
+    .then(
+      json => {
+        dispatch(flashMessage('User deleted!'))
+        dispatch(adminGetUsers(url))
       }
     )
   }
@@ -53,7 +70,7 @@ export const register = (data, url) => {
     })
     .then(
       response => response.json(),
-      error => console.log(error)
+      error => console.error(error)
     )
     .then(
       json => {
@@ -126,7 +143,7 @@ export const rqDelete = (rqId, url) => {
         response.json()
       },
       (error) => {
-        console.log('Error:', error)
+        console.error('Error:', error)
       }
     ).then(
       (json) => {
@@ -146,7 +163,7 @@ export const rqPost = (rq, url) => {
     })
     .then(
       response => response.json(),
-      error => console.log('Error:', error)
+      error => console.error('Error:', error)
     )
     .then(
       json => {
@@ -206,7 +223,7 @@ export const rqsFetch = (url) => {
         dispatch(rqsIsLoading(false))
         return response.json()
       },
-      error => console.log('Error:', error)
+      error => console.error('Error:', error)
     )
     .then(
       json => {
