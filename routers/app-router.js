@@ -1,12 +1,10 @@
 let users = require('../controllers/users'),
+	adminUsers = require('../controllers/admin/users'),
   sessions = require('../controllers/sessions'),
   rqs = require('../controllers/rqs')
 
 exports.draw = (app) => {
-  console.log('drawing app routes')
-
   app.route('/api/users')
-    .get(users.index)
     .post(users.create)
 
   app.route('/api/users/:id')
@@ -22,4 +20,8 @@ exports.draw = (app) => {
 
   app.route('/api/sessions')
     .post(sessions.create)
+
+	// ADMIN
+	app.route('/api/admin/users')
+		.get(adminUsers.index)
 }

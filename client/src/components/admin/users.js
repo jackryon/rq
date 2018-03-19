@@ -6,7 +6,7 @@ import { getUsers } from '../../actions'
 class Users extends React.Component {
 
   componentDidMount() {
-    this.props.getUsers()
+    this.props.getUsers('/api/admin/users')
   }
 
   render() {
@@ -23,7 +23,7 @@ class Users extends React.Component {
           <tbody>
             { this.props.adminUsers.map(user => {
               return (
-                <tr>
+								<tr key={ user._id }>
                   <td>{ user.email }</td>
                   <td>{ user.fullName }</td>
                   <td>{ user.createdAt }</td>

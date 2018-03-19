@@ -13,13 +13,13 @@ export const getUsers = (url) => {
     )
     .then(
       json => {
-        console.log(json)
+				dispatch(adminUsers(json))
       }
     )
   }
 }
 
-export const users = (data) => {
+export const adminUsers = (data) => {
   return {
     type: 'ADMIN_USERS',
     users: data
