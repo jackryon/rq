@@ -7,14 +7,12 @@ exports.create = (req, res) => {
     if(err) return res.status(500).json({ msg: err })
 
     if(!user) {
-      console.log('bad email')
       return res.status(401).json({
         msg: errorMsg, error: { message: errorMsg }
       })
     }
 
     if(!user.comparePassword(req.body.password)) {
-      console.log('bad password')
       return res.status(401).json({
         msg: errorMsg, error: { message: errorMsg }
       })
@@ -32,10 +30,20 @@ exports.destroy = (req, res) => {
   return res.json({ msg: 'session delete' })
 }
 
-const assertLoggedIn = (req, res, next) => {
-  if(req.user){
+exports.assertAuthorized = (req, res, next) => {
+  if(req.user) {
     next()
   } else {
-    return res.status(401).json({ msg: 'unauthorized' })
+    return res.status(401).json({ msg: 'User not authorized!' })
   }
 }
+
+exports.assertAdmin = (req, res, next) => {
+
+  if(req.user) {
+
+  } else {
+
+  }
+}
+
