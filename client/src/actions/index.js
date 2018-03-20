@@ -75,6 +75,7 @@ export const register = (data, url) => {
     .then(
       json => {
         if(json.errors) return dispatch(flashMessage(json.message, 3000))
+				dispatch(flashMessage('Registered!'))
       }
     )
   }
