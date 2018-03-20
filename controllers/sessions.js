@@ -21,7 +21,8 @@ exports.create = (req, res) => {
     return res.json({ token: jwt.sign({
       _id: user._id,
       email: user.email,
-      fullName: user.fullName
+      fullName: user.fullName,
+			role: user.role
     }, 'RESTFULAPIs')})
   })
 }
@@ -34,16 +35,16 @@ exports.assertAuthorized = (req, res, next) => {
   if(req.user) {
     next()
   } else {
+		console.log('***', 'unauthorized')
     return res.status(401).json({ msg: 'User not authorized!' })
   }
 }
 
 exports.assertAdmin = (req, res, next) => {
-
-  if(req.user) {
-
+  if(req.user && req.user.role === 'admin') {
+		next()
   } else {
-
+		return res.status(401).json({ msg: 'Access denied!' })
   }
 }
 

@@ -12,11 +12,11 @@ exports.draw = (app) => {
     .put(users.update)
 
   app.route('/api/rqs')
-    .post(rqs.create)
-    .get(rqs.index)
+    .post(sessions.assertAuthorized, rqs.create)
+    .get(sessions.assertAuthorized, rqs.index)
 
   app.route('/api/rqs/:id')
-    .delete(rqs.destroy)
+    .delete(sessions.assertAuthorized, rqs.destroy)
 
   app.route('/api/sessions')
     .post(sessions.create)

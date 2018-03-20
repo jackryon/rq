@@ -1,5 +1,11 @@
 import { httpHeaders } from '../util'
 
+export const assertAuth = (response) => {
+	if(response.status === 401) {
+		
+	}
+}
+
 export const adminGetUsers = (url) => {
   return (dispatch) => {
     fetch(url, {
@@ -220,16 +226,18 @@ export const rqsFetch = (url) => {
       headers: httpHeaders()
     })
     .then(
-      (response) => {
+      response => {
+				debugger
+				if(response.ok !== true)
         dispatch(rqsIsLoading(false))
-        return response.json()
+        response.json()
       },
       error => console.error('Error:', error)
     )
     .then(
       json => {
-        dispatch(rqsFetchSuccess(json))
-      }
+				dispatch(rqsFetchSuccess(json))
+			}
     )
     .catch(
       error => dispatch(rqsHasErrored(true))

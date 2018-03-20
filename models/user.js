@@ -30,7 +30,12 @@ let UserSchema = new Schema({
   },
   confirmationToken: {
     type: String
-  }
+  },
+	role: {
+		required: true,
+		type: String,
+		default: 'user'
+	}
 })
 
 UserSchema.path('email').validate(email => {
